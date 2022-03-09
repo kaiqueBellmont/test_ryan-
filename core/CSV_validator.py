@@ -62,13 +62,35 @@ class CsvinpersistenceFilter:
 
     # TODO: aqui vc vai criar o filtro de idade de acordo com o codigo, percorrendo o arquivo
     def age_filter(self, file):
-        pass
+        self.lista = []
+        ages = [y[3] for x, y in file]
+        for x in ages:
+            try:
+                int(x)
+            except ValueError:
+                # print(f'Age Error ate line {ages.index(x) + 2} of CSV file.')
+                # print(f'{x} is not a válid integer.')
+                self.lista.append([ages.index(x) + 2, x])
 
+                # teste = int(input("Qual numero deseja colocar? "))
+                # position = ages.index(x)
+                # ages.remove(x)
+                # ages.insert(position, teste)
+                # filtered_ages = [int(x) for x in ages]
+                # print(filtered_ages)
+                # return filtered_ages
+        print("Erro de caracteres:")
+        print("linha | caractere")
+        for x in self.lista:
+            print(x)
     # TODO: aqui vc vai criar o filtro de telefone de acordo com o codigo, percorrendo o arquivo
     def phone_filter(self, file):
+
         pass
 
 
 c = CsvinpersistenceFilter()
-# c.name_filter(c.readed_csv)
-c.email_filter(c.readed_csv)
+# # c.name_filter(c.readed_csv)
+# print(c.readed_csv)
+# c.email_filter(c.readed_csv)
+c.age_filter(c.readed_csv)

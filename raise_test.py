@@ -1,20 +1,6 @@
-erros = [
-    {
-        'linha': 1,
-        'coluna': 1,
-        'nome': 'Kaique'
-    },
-    {
-        'linha': 1,
-        'coluna': 1,
-        'nome': 'Kaique'
-    },
-    {
-        'linha': 1,
-        'coluna': 1,
-        'nome': 'Kaique'
-    },
-]
-print("Erros de nomes:")
-for erro in erros:
-    print(erro)
+tel = '(31) 99138-2787'
+a = tel.split(' ')
+b = a[0][1] + a[0][2]
+print(type(b) == str)
+print(type(a[1]))
+
