@@ -1,4 +1,5 @@
 from utils.decode_strings import normalMap
+from utils.cpf_validator import cpf_validator
 
 normalize = str.maketrans(normalMap)
 
@@ -28,7 +29,9 @@ csv = c.reader()
 class CsvinpersistenceFilter:
     lista = []
 
-    def __init__(self, readed_csv=csv[1:]):
+    def __init__(self, readed_csv=None):
+        if readed_csv is None:
+            readed_csv = csv[1:]
         self.readed_csv = readed_csv
 
     def name_filter(self, file):
@@ -60,7 +63,6 @@ class CsvinpersistenceFilter:
         print(first_and_last_name_from_email)
         print(first_and_last_name_from_names == first_and_last_name_from_email)
 
-    # TODO: aqui vc vai criar o filtro de idade de acordo com o codigo, percorrendo o arquivo
     def age_filter(self, file):
         self.lista = []
         ages = [y[3] for x, y in file]
@@ -68,29 +70,37 @@ class CsvinpersistenceFilter:
             try:
                 int(x)
             except ValueError:
-                # print(f'Age Error ate line {ages.index(x) + 2} of CSV file.')
-                # print(f'{x} is not a válid integer.')
                 self.lista.append([ages.index(x) + 2, x])
 
-                # teste = int(input("Qual numero deseja colocar? "))
-                # position = ages.index(x)
-                # ages.remove(x)
-                # ages.insert(position, teste)
-                # filtered_ages = [int(x) for x in ages]
-                # print(filtered_ages)
-                # return filtered_ages
         print("Erro de caracteres:")
         print("linha | caractere")
         for x in self.lista:
             print(x)
-    # TODO: aqui vc vai criar o filtro de telefone de acordo com o codigo, percorrendo o arquivo
-    def phone_filter(self, file):
 
+    # todo : faz telefone como fiz no cpf
+    def phone_filter(self, file):
         pass
+
+    # todo : faz telefone e as datas como está aqui ok?
+    def cpf_filter(self, file):
+        self.lista = []
+        cpf_list = [y[1] for x, y in file]
+
+        for cpf in cpf_list:
+            if cpf != '{}.{}.{}-{}'.format(cpf[:3], cpf[4:7], cpf[8:11], cpf[12:15]):
+                self.lista.append([cpf_list.index(cpf), cpf])
+
+        print("Erro de formato:")
+        print("O formato deve ser : 'xxx.xxx.xxx-xx'")
+        print("[row | value]")
+        for x in self.lista:
+            print(x)
 
 
 c = CsvinpersistenceFilter()
+c.age_filter(c.readed_csv)
+
+c.cpf_filter(c.readed_csv)
 # # c.name_filter(c.readed_csv)
 # print(c.readed_csv)
 # c.email_filter(c.readed_csv)
-c.age_filter(c.readed_csv)
