@@ -1,3 +1,8 @@
+"""
+Esse arquivo foi apenas utilizado para armazenar essa variavel.
+como não podia importar bibliotecas externas, eu utilizei essa tradução
+encontrada na internet para a remoção de acentos e comparar os emails-names com names
+"""
 normalMap = {'À': 'A', 'Á': 'A', 'Â': 'A', 'Ã': 'A', 'Ä': 'A',
              'à': 'a', 'á': 'a', 'â': 'a', 'ã': 'a', 'ä': 'a', 'ª': 'A',
              'È': 'E', 'É': 'E', 'Ê': 'E', 'Ë': 'E',
